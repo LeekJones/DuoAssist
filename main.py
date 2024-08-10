@@ -1,9 +1,23 @@
+"""
+Main module for the Virtual Personal Assistant.
+
+This script integrates all components, listens for user commands,
+and performs tasks such as workout planning, progress tracking,
+memo management, and grocery list handling.
+"""
+
+import pandas as pd
+
 from assistant.assistant import listen_command, speak
 from assistant.memos import add_memo, list_memos
-from assistant.grocery import add_grocery_item, remove_grocery_item, list_grocery_items
+from assistant.grocery import (
+    add_grocery_item,
+    remove_grocery_item,
+    list_grocery_items
+)
 from assistant.workout import generate_workout
 from assistant.database import create_database, log_workout
-import pandas as pd
+
 
 def main():
     """
@@ -12,7 +26,7 @@ def main():
     """
     create_database()
     speak("Hello! I am your personal fitness assistant. How can I help you today?")
-    
+
     while True:
         command = listen_command()
         if "workout plan" in command:
@@ -33,7 +47,7 @@ def main():
         elif "reminder" in command:
             speak("Please provide the email address to send the reminder.")
             email = listen_command()
-            #send_reminder(email)  # Uncomment and define the send_reminder function to enable reminders
+            # send_reminder(email)  # Uncomment and define send_reminder to enable reminders
             speak("Reminder has been sent.")
         elif "add memo" in command:
             speak("What memo would you like to add?")
